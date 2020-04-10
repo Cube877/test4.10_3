@@ -14,12 +14,12 @@ int main()
 	Mat canny;
 	cvtColor(srcMat, grayMat, COLOR_BGR2GRAY);
 	Canny(srcMat, canny, 50, 200);
-	//2
-	vector<Vec4i> lines;
-	HoughLinesP(canny, lines, 1, CV_PI / 180, 50, 5, 20);
-	for (int i = 0; i < lines.size(); i++)
+	
+	Mat lineMat;
+	HoughLinesP(canny, lineMat, 1, CV_PI / 180, 50, 5, 20);
+	for (int i = 0; i < lineMat.rows; i++)
 	{
-		Vec4i p = lines[i];
+		Vec4i p = lineMat.at<Vec4i>(i, 0);
 		line(srcMat, Point(p[0], p[1]), Point(p[2], p[3]), Scalar(0, 0, 255), 1, CV_AA);
 	}
 
